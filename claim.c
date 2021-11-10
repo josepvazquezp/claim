@@ -64,30 +64,37 @@ Stack *newDeck()
     int e;
 
     D->cN = 0;
-
-    Node *focusNode = D->head;
+    
+    Node *focusNode;
 
     for(i = 0 ; i < 52 ; i++)
     {
         if(D->cN == 0)
         {
-           focusNode = malloc(sizeof(Node));
+            D->head = malloc(sizeof(Node));
+            e = (int*)temp[i][0];
+
+            D->head->level = e - 48;
+            D->head->type = temp[i][1];
+            D->head->next = NULL;
+
+            focusNode = D->head;
         }
         else
         {
             focusNode->next = malloc(sizeof(Node));
             focusNode = focusNode->next;
-        }
-        
-        e = (int*)temp[i][0];
 
-        focusNode->level = e - 48;
-        focusNode->type = temp[i][1];
-        focusNode->next = NULL;
-        
+            e = (int*)temp[i][0];
+
+            focusNode->level = e - 48;
+            focusNode->type = temp[i][1];
+            focusNode->next = NULL;
+        }
+
         D->cN++;
 
-        //printf("#%d Type: %c with level: %d\n", D->cN, focusNode->type, focusNode->level);
+        printf("#%d Type: %c with level: %d\n", D->cN, focusNode->type, focusNode->level);
     }
 
     return D;    
@@ -117,5 +124,5 @@ void displayD(Stack * D)
         focusNode = focusNode->next;
     }
 
-    //printf("\n\n");
+    printf("\n");
 }
