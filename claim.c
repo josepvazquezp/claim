@@ -4,7 +4,7 @@
 #include "claim.h"
 #include "stack.h"
 
-deck *newGame()
+Stack *newDeck()
 {
     char list[52][2] = {{'0' , 'G'}, {'0' , 'G'}, {'0' , 'G'}, {'0' , 'G'}, {'0' , 'G'},
                         {'1' , 'G'}, {'2' , 'G'}, {'3' , 'G'}, {'4' , 'G'}, {'5' , 'G'}, 
@@ -60,18 +60,62 @@ deck *newGame()
 
     }
 
-    deck *D = malloc(sizeof(deck));
+    Stack *D = malloc(sizeof(Stack));
     int e;
+
+    D->cN = 0;
+
+    Node *focusNode = D->head;
 
     for(i = 0 ; i < 52 ; i++)
     {
+        if(D->cN == 0)
+        {
+           focusNode = malloc(sizeof(Node));
+        }
+        else
+        {
+            focusNode->next = malloc(sizeof(Node));
+            focusNode = focusNode->next;
+        }
+        
         e = (int*)temp[i][0];
-        D->top->level = e - 48;
-        D->top->type = temp[i][1];
 
-        //printf("Type: %c with level: %d\n", D->top->type, D->top->level);
+        focusNode->level = e - 48;
+        focusNode->type = temp[i][1];
+        focusNode->next = NULL;
+        
+        D->cN++;
+
+        //printf("#%d Type: %c with level: %d\n", D->cN, focusNode->type, focusNode->level);
     }
 
     return D;    
 
+}
+
+Stack *newPlayer(Stack *D)
+{
+    Stack *p = malloc(sizeof(Stack));
+
+    int i;
+    for(i = 0 ; i < 13 ; i++)
+    {
+        push(p, pop(D));
+    }
+
+    return p;
+}
+
+void displayD(Stack * D)
+{
+    Node *focusNode = D->head;
+
+    while(focusNode != NULL)
+    {
+        printf("Type: %c with level: %d\n", focusNode->type, focusNode->level);
+        focusNode = focusNode->next;
+    }
+
+    //printf("\n\n");
 }

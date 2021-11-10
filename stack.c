@@ -1,31 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "stack.h"
-
-struct node
-{
-  void* data;
-  struct node* next;
-};
-typedef struct node Node;
-
-struct stack
-{
-  Node* head;
-};
-typedef struct stack Stack;
-
-void display(Stack *stack)
-{
-    Node *focusNode = stack->head;
-
-    while(focusNode != NULL)
-    {
-        printf("%d ", *(int*)(focusNode->data));
-        focusNode = focusNode->next;
-    }
-    printf("\n");
-}
+#include "claim.h"
 
 Stack* newStack()
 {
@@ -34,11 +10,14 @@ Stack* newStack()
   return s;
 }
 
-Node* newNode(void *data)
+Node* newNode(Node *data)
 {
   Node* n = malloc(sizeof(Node));
-  n->data = data;
+
+  n->level = data->level;
+  n->type = data->type;
   n->next = NULL;
+
   return n;
 }
 
@@ -55,7 +34,7 @@ void* pop(Stack* s)
     return NULL;
 
   Node* toDel = s->head;
-  void* toRet = s->head->data;
+  Node* toRet = s->head;
   s->head = s->head->next;
   free(toDel);
 
@@ -66,5 +45,5 @@ void* peek(Stack* s)
 {
   if(s->head == NULL)
     return NULL;
-  return s->head->data;
+  return s->head;
 }

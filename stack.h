@@ -13,7 +13,4 @@ void *pop(Stack *stack);
 void *peek(Stack *stack);
 void display(Stack *stack);
 
-int compare(void *a, void *b);
-void sortStack(Stack *s, int(*compare)(void *a, void *b));
-
 #endif

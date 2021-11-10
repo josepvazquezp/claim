@@ -6,7 +6,14 @@
 
 int main(void)
 {
-    deck *D = newGame();
+    Stack *D = newDeck();
+    //Stack *P1 = newPlayer(D);
+    //Stack *P2 = newPlayer(D);
+
+    //displayD(P1);
+    //displayD(P2);
+
+    displayD(D);
 
     return 0;
 }

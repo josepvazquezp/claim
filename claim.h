@@ -1,25 +1,27 @@
 #ifndef CLAIM_CLAIM_H
 #define CLAIM_CLAIM_H
 
-struct Cart
+struct node
 {
     int level;
     char type;
     //imagen
-    struct cart *next;
+    struct node *next;
 };
 
-typedef struct Cart cart;
+typedef struct node Node;
 
-struct Deck
+struct stack
 {
-    cart *top;
+    Node *head;
     int cN;
 };
 
-typedef struct Deck deck;
+typedef struct stack Stack;
 
-deck *newGame();
+Stack *newDeck();
+Stack *newPlayer(Stack *D);
 
+void displayD(Stack * D);
 
 #endif
