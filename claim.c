@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include "claim.h"
 #include "stack.h"
 
@@ -57,6 +58,20 @@ deck *newGame()
             i--;
         }
 
-    }    
+    }
+
+    deck *D = malloc(sizeof(deck));
+    int e;
+
+    for(i = 0 ; i < 52 ; i++)
+    {
+        e = (int*)temp[i][0];
+        D->top->level = e - 48;
+        D->top->type = temp[i][1];
+
+        //printf("Type: %c with level: %d\n", D->top->type, D->top->level);
+    }
+
+    return D;    
 
 }
