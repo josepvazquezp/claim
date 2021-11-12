@@ -21,9 +21,11 @@ Node* newNode(Node *data)
   return n;
 }
 
-void push(Stack* s, void* data)
+void push(Stack* s, Node* data)
 {
-  Node* n = newNode(data);
+  Node* n = malloc(sizeof(Node));
+  n->level = data->level;
+  n->type = data->type;
   n->next = s->head;
   s->head = n;
 }
@@ -34,7 +36,9 @@ void* pop(Stack* s)
     return NULL;
 
   Node* toDel = s->head;
-  Node* toRet = s->head;
+  Node* toRet = malloc(sizeof(Node));
+  toRet->level = s->head->level;
+  toRet->type = s->head->type;
   s->head = s->head->next;
   free(toDel);
 

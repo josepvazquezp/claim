@@ -94,7 +94,7 @@ Stack *newDeck()
 
         D->cN++;
 
-        printf("#%d Type: %c with level: %d\n", D->cN, focusNode->type, focusNode->level);
+        //printf("#%d Type: %c with level: %d\n", D->cN, focusNode->type, focusNode->level);
     }
 
     return D;    
@@ -106,9 +106,14 @@ Stack *newPlayer(Stack *D)
     Stack *p = malloc(sizeof(Stack));
 
     int i;
+    Node *temp;
     for(i = 0 ; i < 13 ; i++)
     {
-        push(p, pop(D));
+        temp = pop(D);
+        push(p, temp);
+
+        D->cN--;
+        p->cN++;
     }
 
     return p;
@@ -124,5 +129,5 @@ void displayD(Stack * D)
         focusNode = focusNode->next;
     }
 
-    printf("\n");
+    printf("\n\n");
 }

@@ -7,13 +7,15 @@
 int main(void)
 {
     Stack *D = newDeck();
-    //Stack *P1 = newPlayer(D);
-    //Stack *P2 = newPlayer(D);
+    displayD(D);
 
-    //displayD(P1);
+    Stack *P1 = newPlayer(D);
+    displayD(P1);
+
+    //Stack *P2 = newPlayer(D);
     //displayD(P2);
 
-    displayD(D);
+    //displayD(D);
 
     return 0;
 }
