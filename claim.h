@@ -15,6 +15,7 @@ struct stack
 {
     Node *head;
     int cN;
+    int t;
 };
 
 typedef struct stack Stack;
@@ -22,7 +23,7 @@ typedef struct stack Stack;
 Stack *newDeck();
 Stack *newPlayer(Stack *D);
 
-void firstR(Stack *P1, Stack *P2);
+void firstR(Stack *D, Stack *V, Stack *P1, Stack *P2, Stack *P1R2, Stack *P2R2);
 
 void displayD(Stack * D);
 

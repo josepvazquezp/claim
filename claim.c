@@ -60,7 +60,7 @@ Stack *newDeck()
 
     }
 
-    Stack *D = malloc(sizeof(Stack));
+    Stack *D = newStack();
     int e;
 
     D->cN = 0;
@@ -119,19 +119,71 @@ Stack *newPlayer(Stack *D)
     return p;
 }
 
-void firstR(Stack *P1, Stack *P2)
+void firstR(Stack *D, Stack *V, Stack *P1, Stack *P2, Stack *P1R2, Stack *P2R2)
 {
+    Stack *temp = newStack();
+    Node *tC = pop(D);
+    Node *nT;
+    Node *nT2;
+    Node *r;
+    int c;
+    int i;
 
+    printf("[Deck] Type: %c level: %d\n", tC->type, tC->level);
+
+    if(D->t == 0)
+    {
+        displayD(P1);
+        printf("Introduce nUm de carta: ");
+        scanf("%d", &c);
+        for(i = 0 ; i < c ; i++)
+        {
+            r = pop(P1);
+            push(temp, r);
+        }
+        
+        nT = pop(temp);
+
+        while(peek(temp) != NULL)
+        {
+            r = pop(temp);
+            push(P1, r);
+        }
+
+        displayD(P2);
+        printf("Introduce nUm de carta: ");
+        scanf("%d", &c);
+        for(i = 0 ; i < c ; i++)
+        {
+            r = pop(P2);
+            push(temp, r);
+        }
+        
+        nT2 = pop(temp);
+
+        while(peek(temp) != NULL)
+        {
+            r = pop(temp);
+            push(P2, r);
+        }
+        
+    }
+
+    printf("[Deck] Type: %c level: %d\n", tC->type, tC->level);
+    printf("[P1] Type: %c level: %d\n", nT->type, nT->level);
+    printf("[P2] Type: %c level: %d\n", nT2->type, nT2->level);
 }
 
 void displayD(Stack * D)
 {
     Node *focusNode = D->head;
+    int i = 1;
 
     while(focusNode != NULL)
     {
-        printf("Type: %c with level: %d\n", focusNode->type, focusNode->level);
+        printf("#%d Type: %c with level: %d\n", i, focusNode->type, focusNode->level);
         focusNode = focusNode->next;
+        i++;
     }
 
     printf("\n\n");
