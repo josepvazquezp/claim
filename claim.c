@@ -103,7 +103,7 @@ Stack *newDeck()
 
 Stack *newPlayer(Stack *D)
 {
-    Stack *p = malloc(sizeof(Stack));
+    Stack *p = newStack();
 
     int i;
     Node *temp;
@@ -117,6 +117,11 @@ Stack *newPlayer(Stack *D)
     }
 
     return p;
+}
+
+void firstR(Stack *P1, Stack *P2)
+{
+
 }
 
 void displayD(Stack * D)

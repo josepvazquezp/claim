@@ -22,6 +22,8 @@ typedef struct stack Stack;
 Stack *newDeck();
 Stack *newPlayer(Stack *D);
 
+void firstR(Stack *P1, Stack *P2);
+
 void displayD(Stack * D);
 
 #endif
