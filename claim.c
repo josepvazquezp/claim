@@ -211,47 +211,81 @@ void itsGoTimeBBY(Stack *D, Stack *V1, Stack *V2, Stack *P1, Stack *P2, Stack *P
 
     if(nT->type == nT2->type || nT->type == 'D' || nT2->type == 'D') //comparacion de nivel y comodin
     {
-        // if(nT->type == 'N' || nT2->type == 'N')
-        // {
-        //     int b = 0;
-        //     if(nT->type == nT2->type)
-        //         b = 1;
-        //     else if(D->t == 0 && nT2->type == 'D' && nT->type == 'N')
-        //         b = 2;
-        //     else if(D->t == 1 && nT->type == 'D' && nT2->type == 'N')
-        //         b = 3;
-        //     else if(D->t == 0 && nT2->type == 'N' && nT->type == 'D')
-        //         b = 4;
-        //     else if(D->t == 1 && nT->type == 'N' && nT2->type == 'D')
-        //         b = 5;
-
-        //     if(nT->level > nT2->level)
-        //     {
-        //         if(b == 1)
-        //         {
-        //             push(V1, nT);
-        //             push(V1, nT2);
-        //         }
-        //         else if(nT->type == 'N')
-        //             push(V1, nT);
-        //         else if(nT2->type == 'N')
-        //             push(V1, nT2);
-        //     }
-        //     else if(nT->level < nT2->level)
-        //         push(P2R2, tC);
-        //     else if(nT->level == nT2->level && D->t == 0)
-        //         push(P1R2, tC);
-        //     else if(nT->level == nT2->level && D->t == 1)
-        //         push(P2R2, tC);
-        // }
-        if(nT->level > nT2->level)
+        if(D->t == 0 && nT2->type == 'N' && nT->type == 'D')
+        {
+            push(V1, nT2);
             push(P1R2, tC);
-        else if(nT->level < nT2->level)
+            D->t = 0;
+        }
+        else if(D->t == 1 && nT->type == 'N' && nT2->type == 'D')
+        {
+            push(V2, nT2);
             push(P2R2, tC);
-        else if(nT->level == nT2->level && D->t == 0)
+            D->t = 1; 
+        }
+        else if(nT->type == 'N' || nT2->type == 'N')
+        {
+            int b = 0;
+            if(nT->type == nT2->type)
+                b = 1;
+            else if(D->t == 0 && nT2->type == 'D' && nT->type == 'N')
+                b = 2;
+            else if(D->t == 1 && nT->type == 'D' && nT2->type == 'N')
+                b = 3;
+            
+            if(nT->level > nT2->level || (nT->level == nT2->level && D->t == 0))
+            {
+                if(b == 1)
+                {
+                    push(V1, nT);
+                    push(V1, nT2);
+                    D->t = 0;
+                }
+                else if(b == 2)
+                {
+                    push(V1, nT);
+                    push(P1R2, tC);
+                    D->t = 0;
+                }
+                else if(b == 3)
+                {
+                    push(V1, nT2);
+                    push(P1R2, tC);
+                    D->t = 0;
+                }
+            }
+            else if(nT->level < nT2->level || (nT->level == nT2->level && D->t == 1))
+            {
+                if(b == 1)
+                {
+                    push(V2, nT);
+                    push(V2, nT2);
+                    D->t = 1;
+                }
+                else if(b == 2)
+                {
+                    push(V2, nT);
+                    push(P2R2, tC);
+                    D->t = 1;
+                }
+                else if(b == 3)
+                {
+                    push(V2, nT2);
+                    push(P2R2, tC);
+                    D->t = 1;
+                }
+            }
+        }
+        else if(nT->level > nT2->level || (nT->level == nT2->level && D->t == 0))
+        {
             push(P1R2, tC);
-        else if(nT->level == nT2->level && D->t == 1)
+            D->t = 0;
+        }
+        else if(nT->level < nT2->level || (nT->level == nT2->level && D->t == 1))
+        {
             push(P2R2, tC);
+            D->t = 1;
+        }
     }
     // else if(nT->type != nT2->type)
     // { 
@@ -261,6 +295,7 @@ void itsGoTimeBBY(Stack *D, Stack *V1, Stack *V2, Stack *P1, Stack *P2, Stack *P
     //     }   
     // }
     displayD(P1R2);
+    displayD(V1);
 }
 
 void displayD(Stack * D)
