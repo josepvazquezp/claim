@@ -119,7 +119,7 @@ Stack *newPlayer(Stack *D)
     return p;
 }
 
-void firstR(Stack *D, Stack *V, Stack *P1, Stack *P2, Stack *P1R2, Stack *P2R2)
+void itsGoTimeBBY(Stack *D, Stack *V1, Stack *V2, Stack *P1, Stack *P2, Stack *P1R2, Stack *P2R2)
 {
     Stack *temp = newStack();
     Node *tC = pop(D);
@@ -168,10 +168,99 @@ void firstR(Stack *D, Stack *V, Stack *P1, Stack *P2, Stack *P1R2, Stack *P2R2)
         }
         
     }
+    else if(D->t == 1)
+    {
+        displayD(P2);
+        printf("Introduce nUm de carta: ");
+        scanf("%d", &c);
+        for(i = 0 ; i < c ; i++)
+        {
+            r = pop(P2);
+            push(temp, r);
+        }
+        
+        nT = pop(temp);
+
+        while(peek(temp) != NULL)
+        {
+            r = pop(temp);
+            push(P2, r);
+        }
+
+        displayD(P1);
+        printf("Introduce nUm de carta: ");
+        scanf("%d", &c);
+        for(i = 0 ; i < c ; i++)
+        {
+            r = pop(P1);
+            push(temp, r);
+        }
+        
+        nT2 = pop(temp);
+
+        while(peek(temp) != NULL)
+        {
+            r = pop(temp);
+            push(P1, r);
+        }
+    }
 
     printf("[Deck] Type: %c level: %d\n", tC->type, tC->level);
     printf("[P1] Type: %c level: %d\n", nT->type, nT->level);
     printf("[P2] Type: %c level: %d\n", nT2->type, nT2->level);
+
+    if(nT->type == nT2->type || nT->type == 'D' || nT2->type == 'D') //comparacion de nivel y comodin
+    {
+        // if(nT->type == 'N' || nT2->type == 'N')
+        // {
+        //     int b = 0;
+        //     if(nT->type == nT2->type)
+        //         b = 1;
+        //     else if(D->t == 0 && nT2->type == 'D' && nT->type == 'N')
+        //         b = 2;
+        //     else if(D->t == 1 && nT->type == 'D' && nT2->type == 'N')
+        //         b = 3;
+        //     else if(D->t == 0 && nT2->type == 'N' && nT->type == 'D')
+        //         b = 4;
+        //     else if(D->t == 1 && nT->type == 'N' && nT2->type == 'D')
+        //         b = 5;
+
+        //     if(nT->level > nT2->level)
+        //     {
+        //         if(b == 1)
+        //         {
+        //             push(V1, nT);
+        //             push(V1, nT2);
+        //         }
+        //         else if(nT->type == 'N')
+        //             push(V1, nT);
+        //         else if(nT2->type == 'N')
+        //             push(V1, nT2);
+        //     }
+        //     else if(nT->level < nT2->level)
+        //         push(P2R2, tC);
+        //     else if(nT->level == nT2->level && D->t == 0)
+        //         push(P1R2, tC);
+        //     else if(nT->level == nT2->level && D->t == 1)
+        //         push(P2R2, tC);
+        // }
+        if(nT->level > nT2->level)
+            push(P1R2, tC);
+        else if(nT->level < nT2->level)
+            push(P2R2, tC);
+        else if(nT->level == nT2->level && D->t == 0)
+            push(P1R2, tC);
+        else if(nT->level == nT2->level && D->t == 1)
+            push(P2R2, tC);
+    }
+    // else if(nT->type != nT2->type)
+    // { 
+    //     if(D->t == 0 && nT->type == 'N' || D->t == 1 && nT2->type == 'N') //ncromancers puntos directos
+    //     {
+
+    //     }   
+    // }
+    displayD(P1R2);
 }
 
 void displayD(Stack * D)

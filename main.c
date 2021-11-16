@@ -8,7 +8,8 @@ int main(void)
 {
     //setbuff(stdout, 0);
 
-    Stack *V = newStack();
+    Stack *V1 = newStack();
+    Stack *V2 = newStack();
     Stack *D = newDeck();
     //displayD(D);
 
@@ -22,7 +23,9 @@ int main(void)
 
     Stack *P1R2 = newStack();
     Stack *P2R2 = newStack();
-    firstR(D, V, P1, P2, P1R2, P2R2);
+
+    itsGoTimeBBY(D, V1, V2, P1, P2, P1R2, P2R2);
+    
 
     return 0;
 }

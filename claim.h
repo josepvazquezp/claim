@@ -23,7 +23,7 @@ typedef struct stack Stack;
 Stack *newDeck();
 Stack *newPlayer(Stack *D);
 
-void firstR(Stack *D, Stack *V, Stack *P1, Stack *P2, Stack *P1R2, Stack *P2R2);
+void itsGoTimeBBY(Stack *D, Stack *V1, Stack *V2, Stack *P1, Stack *P2, Stack *P1R2, Stack *P2R2);
 
 void displayD(Stack * D);
 
