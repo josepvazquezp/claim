@@ -308,15 +308,27 @@ void itsGoTimeBBY(Stack *D, Stack *V1, Stack *V2, Stack *P1, Stack *P2, Stack *P
                 push(P2R2, tC);
                 D->t = 1;
             }
-            else if(D->t == 0 && nT->type == 'G' && nT2->type == 'K')
+            else if(D->t == 0 && nT2->type == 'N')
             {
+                push(V1, nT2);
                 push(P1R2, tC);
                 D->t = 0;
             }
-            else if(D->t == 1 && nT->type == 'K' && nT2->type == 'G')
+            else if(D->t == 1 && nT->type == 'N')
+            {
+                push(V2, nT);
+                push(P2R2, tC);
+                D->t = 1;
+            }
+            else if(D->t == 0 && nT->type == 'G' && nT2->type == 'K')
             {
                 push(P2R2, tC);
                 D->t = 1;
+            }
+            else if(D->t == 1 && nT->type == 'K' && nT2->type == 'G')
+            {
+                push(P1R2, tC);
+                D->t = 0;
             }
             else if(D->t == 0)
             {
