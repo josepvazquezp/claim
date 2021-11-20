@@ -24,8 +24,20 @@ int main(void)
     Stack *P1R2 = newStack();
     Stack *P2R2 = newStack();
 
-    itsGoTimeBBY(D, V1, V2, P1, P2, P1R2, P2R2);
-    
+    while(peek(D) != NULL)
+    {
+        itsGoTimeBBY(D, V1, V2, P1, P2, P1R2, P2R2);
+    }
 
+    while(peek(P1R2) != NULL && peek(P2R2) != NULL)
+    {
+        round2(D, V1, V2, P1R2, P2R2);
+        printf("\n\n");
+        displayD(V1);
+        printf("-------\n\n");
+        displayD(V2);
+        printf("\n\n");
+    }
+    
     return 0;
 }
