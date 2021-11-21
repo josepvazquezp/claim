@@ -1034,7 +1034,7 @@ void ClaimWinner(Stack *V1, Stack *V2){
     //DECISION DE GANADOR FINAL
 
     if (VT1 > VT2)
-      printf("¡Gana el Jugador 1!");
+      printf("¡Gana el Jugador 1!\n");
 
     else if (VT2 > VT1)
       printf("¡Gana el Jugador 2!");
