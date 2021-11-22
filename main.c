@@ -44,6 +44,8 @@ int main(void)
         printf("\n\n");
         i++;
     }
+
+    ClaimWinner(V1 , V2);
     
     claimWinner(V1, V2);
 

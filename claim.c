@@ -627,9 +627,13 @@ void displayD(Stack * D)
 
     printf("\n\n");
 }
+<<<<<<< HEAD
 
 void claimWinner(Stack *V1, Stack *V2)
 {
+=======
+void ClaimWinner(Stack *V1, Stack *V2){
+>>>>>>> 449e1f42f7f1bbc0900b0f60bdaa1e9572a15cf4
     //SUMA DE VOTANTES DE PLAYER 1
     Stack *TempP1 = newStack();
     int P1TG = 0;
@@ -638,6 +642,7 @@ void claimWinner(Stack *V1, Stack *V2)
     int P1TD = 0;
     int P1TK = 0;
     int VT1 = 0;   
+<<<<<<< HEAD
     int P1MAX = 0;
 
     while(peek(V1) != NULL)
@@ -657,6 +662,24 @@ void claimWinner(Stack *V1, Stack *V2)
     }
     //SUMA DE VOTANTES DE PLAYER 2
     Stack *TempP2 = newStack();
+=======
+    int P1MAX=0; 
+    while(peek(V1)!=NULL){
+      if (V1->head->type == 'G')
+        P1TG++;
+      else if (V1->head->type == 'E')
+        P1TE++;
+      else if (V1->head->type == 'N')
+        P1TN++;
+      else if (V1->head->type == 'D')
+        P1TD++;
+      else if (V1->head->type == 'K')
+        P1TK++;
+      push(TempP1,pop(V1));
+    }
+    //SUMA DE VOTANTES DE PLAYER 2
+     Stack *TempP2 = newStack();
+>>>>>>> 449e1f42f7f1bbc0900b0f60bdaa1e9572a15cf4
     int P2TG = 0;
     int P2TE = 0;
     int P2TN = 0;
@@ -1069,9 +1092,18 @@ void claimWinner(Stack *V1, Stack *V2)
 
     //DECISION DE GANADOR FINAL
 
+<<<<<<< HEAD
     if(VT1 > VT2)
       printf("!Gana el Jugador 1!\n");
 
     else if(VT2 > VT1)
       printf("!Gana el Jugador 2!\n");
 }
+=======
+    if (VT1 > VT2)
+      printf("¡Gana el Jugador 1!\n");
+
+    else if (VT2 > VT1)
+      printf("¡Gana el Jugador 2!");
+}
+>>>>>>> 449e1f42f7f1bbc0900b0f60bdaa1e9572a15cf4
