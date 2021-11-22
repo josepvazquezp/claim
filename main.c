@@ -29,15 +29,23 @@ int main(void)
         itsGoTimeBBY(D, V1, V2, P1, P2, P1R2, P2R2);
     }
 
+    int i = 1;
+
     while(peek(P1R2) != NULL && peek(P2R2) != NULL)
     {
+        printf("\t\tRONDA 2\n \t\tvuelta: %d\n", i);
         round2(D, V1, V2, P1R2, P2R2);
         printf("\n\n");
+        printf("\t\tVOTANTES P1\n");
         displayD(V1);
         printf("-------\n\n");
+        printf("\t\tVOTANTES P2\n");
         displayD(V2);
         printf("\n\n");
+        i++;
     }
     
+    claimWinner(V1, V2);
+
     return 0;
 }
