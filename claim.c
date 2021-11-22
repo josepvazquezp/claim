@@ -630,61 +630,119 @@ void displayD(Stack * D)
 
 void claimWinner(Stack *V1, Stack *V2)
 {
-    //SUMA DE VOTANTES DE PLAYER 1
-    Stack *TempP1 = newStack();
     int P1TG = 0;
     int P1TE = 0;
     int P1TN = 0;
     int P1TD = 0;
     int P1TK = 0;
     int VT1 = 0;   
-    int P1MAX = 0;
+    int P1GMax = 0;
+    int P1EMax = 0;
+    int P1NMax = 0;
+    int P1DMax = 0;
+    int P1KMax = 0;
 
     while(peek(V1) != NULL)
     {
         if(V1->head->type == 'G')
+        {
+            if(V1->head->level > P1GMax)
+                P1GMax = V1->head->level;
+            
             P1TG++;
+        }
         else if(V1->head->type == 'E')
-            P1TE++;
-        else if(V1->head->type == 'N')
-            P1TN++;
-        else if(V1->head->type == 'D')
-            P1TD++;
-        else if(V1->head->type == 'K')
-            P1TK++;
+        {
+            if(V1->head->level > P1EMax)
+                P1EMax = V1->head->level;
 
-        push(TempP1, pop(V1));
+            P1TE++;
+        }
+        else if(V1->head->type == 'N')
+        {
+            if(V1->head->level > P1NMax)
+                P1NMax = V1->head->level;
+
+            P1TN++;
+        }
+        else if(V1->head->type == 'D')
+        {
+            if(V1->head->level > P1DMax)
+                P1DMax = V1->head->level;
+
+            P1TD++;
+        }
+        else if(V1->head->type == 'K')
+        {
+            if(V1->head->level > P1KMax)
+                P1KMax = V1->head->level;
+
+            P1TK++;
+        }
+
+        pop(V1);
     }
-    //SUMA DE VOTANTES DE PLAYER 2
-    Stack *TempP2 = newStack();
+
     int P2TG = 0;
     int P2TE = 0;
     int P2TN = 0;
     int P2TD = 0;
     int P2TK = 0;
     int VT2 = 0;   
-    int P2MAX = 0;
+    int P2GMax = 0;
+    int P2EMax = 0;
+    int P2NMax = 0;
+    int P2DMax = 0;
+    int P2KMax = 0;
 
     while(peek(V2) != NULL)
     {
         if(V2->head->type == 'G')
+        {
+            if(V2->head->level > P2GMax)
+                P2GMax = V2->head->level;
+            
             P2TG++;
+        }
         else if(V2->head->type == 'E')
-            P2TE++;
-        else if(V2->head->type == 'N')
-            P2TN++;
-        else if(V2->head->type == 'D')
-            P2TD++;
-        else if(V2->head->type == 'K')
-            P2TK++;
+        {
+            if(V2->head->level > P2EMax)
+                P2EMax = V2->head->level;
 
-        push(TempP2, pop(V2));
+            P2TE++;
+        }
+        else if(V2->head->type == 'N')
+        {
+            if(V2->head->level > P2NMax)
+                P2NMax = V2->head->level;
+
+            P2TN++;
+        }
+        else if(V2->head->type == 'D')
+        {
+            if(V2->head->level > P2DMax)
+                P2DMax = V2->head->level;
+
+            P2TD++;
+        }
+        else if(V2->head->type == 'K')
+        {
+            if(V2->head->level > P2KMax)
+                P2KMax = V2->head->level;
+
+            P2TK++;
+        }
+        
+        pop(V2);
     }
 
-    int c = 0;
-    //COMPARACIONES 
+    printf("\n[P1TG]: %d\t[P1TE]: %d\t[P1TN]: %d\t[P1TD]: %d\t[P1TK]: %d\t\n", P1TG, P1TE, P1TN, P1TD, P1TK);
+    printf("[P1GMax]: %d\t[P1EMax]: %d\t[P1NMax]: %d\t[P1DMax]: %d\t[P1KMax]: %d\t\n", P1GMax, P1EMax, P1NMax, P1DMax, P1KMax);
 
-    //COMP G
+    printf("\n[P2TG]: %d\t[P2TE]: %d\t[P2TN]: %d\t[P2TD]: %d\t[P2TK]: %d\t\n", P2TG, P2TE, P2TN, P2TD, P2TK);
+    printf("[P2GMax]: %d\t[P2EMax]: %d\t[P2NMax]: %d\t[P2DMax]: %d\t[P2KMax]: %d\t\n", P2GMax, P2EMax, P2NMax, P2DMax, P2KMax);
+
+    //Goblins
     if(P1TG > P2TG)
     {
         printf("Mas Goblins Votaron por el Jugador 1\n");
@@ -695,383 +753,134 @@ void claimWinner(Stack *V1, Stack *V2)
         printf("Mas Goblins Votaron por el Jugador 2\n");
         VT2++;
     }
-    else
+    else if(P1TG == P2TG)
     {
         printf("Empate\n");
 
-        while(peek(TempP2) != NULL)
-        {
-            if(c == 0 && TempP2->head->type == 'G')
-            {
-                P2MAX = TempP2->head->level;
-                c++;
-            }
- 
-            if(TempP2->head->type == 'G' && TempP2->head->level > P2MAX)
-            {
-                P2MAX = TempP2->head->level;
-            }
-  
-            push(V2, pop(TempP2));
-        }
-
-        c = 0;
-
-        while(peek(TempP1) != NULL)
-        {
-
-            if(c == 0 && TempP1->head->type == 'G')
-            {
-                P1MAX = TempP1->head->level;
-                c++;
-            }
-
-            if(TempP1->head->type == 'G' && TempP1->head->level > P1MAX)
-            {
-                P1MAX = TempP1->head->level;
-            }
-        
-            push(V1, pop(TempP1));
-        }
-
-        c = 0;
-
-        if(P2MAX > P1MAX)
-        { 
-            printf("El Jugador 2 Tiene el voto del Goblin mas alto, por lo que se lleva el voto de los Goblins\n"); 
-            VT2++;
-        } 
-        else if(P2MAX < P1MAX)
+        if(P1GMax > P2GMax)
         { 
             printf("El Jugador 1 Tiene el voto del Goblin mas alto, por lo que se lleva el voto de los Goblins\n"); 
             VT1++;
         } 
-
-        while(peek(V1) != NULL)
-        {
-            push(TempP1, pop(V1));
-        }
-        while(peek(V2) != NULL)
-        {
-            push(TempP2, pop(V2));
-        }
-
+        else if(P2GMax > P1GMax)
+        { 
+            printf("El Jugador 2 Tiene el voto del Goblin mas alto, por lo que se lleva el voto de los Goblins\n"); 
+            VT2++;
+        } 
     }
 
-    //COMP ENANOS
+    //Enanos
     if(P1TE > P2TE)
     {
         printf("Mas Enanos Votaron por el Jugador 1\n");
         VT1++;
     }
-
     else if(P2TE > P1TE)
     {
-        printf("Mas Enanaos Votaron por el Jugador 2\n");
+        printf("Mas Enanos Votaron por el Jugador 2\n");
         VT2++;
     }
-
-    else
+    else if(P1TE == P2TE)
     {
         printf("Empate\n");
 
-        c = 0;
-
-        while(peek(TempP2) != NULL)
-        {
-            if(c == 0 && TempP2->head->type == 'E')
-            {
-                P2MAX=TempP2->head->level;
-                c++;
-            }
-
-            if(TempP2->head->type == 'E' && TempP2->head->level > P2MAX)
-            {
-                P2MAX=TempP2->head->level;   
-            }
-    
-            push(V2, pop(TempP2));
-        }
-
-        c = 0;
-
-        while(peek(TempP1) != NULL)
-        {
-
-            if(c == 0 &&TempP1->head->type == 'E')
-            {
-                P1MAX=TempP1->head->level;
-                c++;
-            }
-
-            if(TempP1->head->type == 'E' && TempP1->head->level > P1MAX)
-            {
-                P1MAX=TempP1->head->level;
-            }
-    
-            push(V1, pop(TempP1));
-        }
-
-        c = 0;
-
-        if(P2MAX > P1MAX)
-        { 
-            printf("El Jugador 2 Tiene el voto del Enano mas alto, por lo que se lleva el voto de los Enanos\n"); 
-            VT2++;
-        } 
-        else if(P2MAX < P1MAX)
+        if(P1EMax > P2EMax)
         { 
             printf("El Jugador 1 Tiene el voto del Enano mas alto, por lo que se lleva el voto de los Enanos\n"); 
             VT1++;
         } 
-
-        while(peek(V1) != NULL)
-        {
-            push(TempP1, pop(V1));
-        }
-        while(peek(V2) != NULL)
-        {
-            push(TempP2, pop(V2));
-        }
-
+        else if(P2EMax > P1EMax)
+        { 
+            printf("El Jugador 2 Tiene el voto del Enano mas alto, por lo que se lleva el voto de los Enanos\n"); 
+            VT2++;
+        } 
     }
 
-    //COMP NECROMANCERS
+    //necromancers
     if(P1TN > P2TN)
     {
         printf("Mas Necromancers Votaron por el Jugador 1\n");
         VT1++;
     }
-
     else if(P2TN > P1TN)
     {
         printf("Mas Necromancers Votaron por el Jugador 2\n");
         VT2++;
     }
-    else
+    else if(P1TN == P2TN)
     {
-
         printf("Empate\n");
-        
-        c = 0;
 
-        while(peek(TempP2) != NULL)
-        {
-            if(c == 0 &&TempP2->head->type == 'N')
-            {
-                P2MAX=TempP2->head->level;
-                c++;
-            }
-
-            if(TempP2->head->type == 'N' && TempP2->head->level > P2MAX)
-            {
-                P2MAX=TempP2->head->level;  
-            }
-    
-            push(V2, pop(TempP2));
-        }
-
-        c = 0;
-
-        while(peek(TempP1) != NULL)
-        {
-
-            if (c == 0 &&TempP1->head->type == 'N')
-            {
-                P1MAX=TempP1->head->level;
-                c++;
-            }
-
-            if (TempP1->head->type == 'N' && TempP1->head->level > P1MAX)
-            {
-                P1MAX=TempP1->head->level;
-            }
-        
-            push(V1, pop(TempP1));
-        }
-
-        c = 0;
-
-        if(P2MAX > P1MAX)
+        if(P1NMax > P2NMax)
         { 
-            printf("El Jugador 2 Tiene el voto del necromancer mas alto, por lo que se lleva el voto de los necromancers\n"); 
-            VT2++;
-        } 
-        else if(P2MAX < P1MAX)
-        { 
-            printf("El Jugador 1 Tiene el voto del necromancer mas alto, por lo que se lleva el voto de los necromancers\n"); 
+            printf("El Jugador 1 Tiene el voto del Necromancer mas alto, por lo que se lleva el voto de los Necromancers\n"); 
             VT1++;
         } 
-
-        while(peek(V1) != NULL)
-        {
-            push(TempP1, pop(V1));
-        }
-        while(peek(V2) != NULL)
-        {
-            push(TempP2, pop(V2));
-        }
-
+        else if(P2NMax > P1NMax)
+        { 
+            printf("El Jugador 2 Tiene el voto del Necromancer mas alto, por lo que se lleva el voto de los Necromancers\n"); 
+            VT2++;
+        }  
     }
 
-    //COMP DOPPELGANGERS
-    if(P1TN > P2TN)
+    //doppelgangers
+    if(P1TD > P2TD)
     {
         printf("Mas Doppelgangers Votaron por el Jugador 1\n");
         VT1++;
     }
-
-    else if(P2TN > P1TN)
+    else if(P2TD > P1TD)
     {
         printf("Mas Doppelgangers Votaron por el Jugador 2\n");
         VT2++;
     }
-    else
+    else if(P1TD == P2TD)
     {
         printf("Empate\n");
 
-        c = 0;
-
-        while(peek(TempP2) != NULL)
-        {
-            if(c == 0 &&TempP2->head->type == 'D')
-            {
-                P2MAX=TempP2->head->level;
-                c++;
-            }
-
-            if (TempP2->head->type == 'D' && TempP2->head->level > P2MAX)
-            {
-                P2MAX=TempP2->head->level;
-            }
-        
-            push(V2, pop(TempP2));
-        }
-
-        c = 0;
-
-        while(peek(TempP1) != NULL)
-        {
-
-            if(c == 0 &&TempP1->head->type == 'D')
-            {
-                P1MAX=TempP1->head->level;
-                c++;
-            }
-
-            if(TempP1->head->type == 'D' && TempP1->head->level > P1MAX)
-            {
-                P1MAX=TempP1->head->level;
-            }
-        
-            push(V1, pop(TempP1));
-        }
-
-        c = 0;
-
-        if(P2MAX > P1MAX)
-        { 
-            printf("El Jugador 2 Tiene el voto del Doppelganger mas alto, por lo que se lleva el voto de los Doppelgangers\n"); 
-            VT2++;
-        } 
-        else if(P2MAX < P1MAX)
+        if(P1DMax > P2DMax)
         { 
             printf("El Jugador 1 Tiene el voto del Doppelganger mas alto, por lo que se lleva el voto de los Doppelgangers\n"); 
             VT1++;
         } 
-
-        while(peek(V1) != NULL)
-        {
-            push(TempP1, pop(V1));
-        }
-        while(peek(V2) != NULL)
-        {
-            push(TempP2, pop(V2));
-        }
-
+        else if(P2DMax > P1DMax)
+        { 
+            printf("El Jugador 2 Tiene el voto del Doppelganger mas alto, por lo que se lleva el voto de los Doppelgangers\n"); 
+            VT2++;
+        }   
     }
 
-    //COMP KNIGHTS
-    if(P1TN > P2TN)
+    //knights
+    if(P1TK > P2TK)
     {
-        printf("Mas Caballeros Votaron por el Jugador 1\n");
+        printf("Mas Knights Votaron por el Jugador 1\n");
         VT1++;
     }
-    else if(P2TN > P1TN)
+    else if(P2TK > P1TK)
     {
-        printf("Mas Caballeros Votaron por el Jugador 2\n");
+        printf("Mas Knights Votaron por el Jugador 2\n");
         VT2++;
     }
-    else
+    else if(P1TK == P2TK)
     {
         printf("Empate\n");
 
-        c = 0;
-
-        while(peek(TempP2) != NULL)
-        {
-            if(c == 0 &&TempP2->head->type == 'K')
-            {
-                P2MAX=TempP2->head->level;
-                c++;
-            }
-
-            if(TempP2->head->type == 'K' && TempP2->head->level > P2MAX)
-            {
-                P2MAX=TempP2->head->level;
-            }
-        
-            push(V2, pop(TempP2));
-        }
-         
-        c = 0;
-
-        while(peek(TempP1) != NULL)
-        {
-
-            if(c == 0 &&TempP1->head->type == 'K')
-            {
-                P1MAX=TempP1->head->level;
-                c++;
-            }
-
-            if(TempP1->head->type == 'K' && TempP1->head->level > P1MAX)
-            {
-                P1MAX=TempP1->head->level;
-            }
-        
-            push(V1, pop(TempP1));
-        }
-
-        c = 0;
-
-        if(P2MAX > P1MAX)
+        if(P1KMax > P2KMax)
         { 
-            printf("El Jugador 2 Tiene el voto del Caballero, por lo que se lleva el voto de los Caballeros\n"); 
-            VT2++;
-        } 
-        else if(P2MAX < P1MAX)
-        { 
-            printf("El Jugador 1 Tiene el voto del Caballero mas alto, por lo que se lleva el voto de los Caballeros\n"); 
+            printf("El Jugador 1 Tiene el voto del Knight mas alto, por lo que se lleva el voto de los Knights\n"); 
             VT1++;
         } 
-
-        while(peek(V1) != NULL)
-        {
-            push(TempP1, pop(V1));
-        }
-        while(peek(V2) != NULL)
-        {
-            push(TempP2, pop(V2));
-        }
-
+        else if(P2KMax > P1KMax)
+        { 
+            printf("El Jugador 2 Tiene el voto del Knight mas alto, por lo que se lleva el voto de los Knights\n"); 
+            VT2++;
+        } 
     }
 
-    //DECISION DE GANADOR FINAL
+     //decision de GANADOR FINAL
 
     if(VT1 > VT2)
       printf("!Gana el Jugador 1!\n");
-
     else if(VT2 > VT1)
       printf("!Gana el Jugador 2!\n");
 }
