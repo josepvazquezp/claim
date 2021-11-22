@@ -452,14 +452,14 @@ void round2(Stack *D, Stack *V1, Stack *V2,Stack *P1R2, Stack *P2R2)
     //CONDICIONES GOBLIN Y KNIGHT
     if (D->t == 1 && nT->type == 'K' && nT2->type == 'G')
     {
-        push(V1,nT);
-        push(V1,nT2);
+        push(V1, nT);
+        push(V1, nT2);
         D->t = 0;
     }
     else if(D->t == 0 && nT2->type == 'K' && nT->type == 'G')
     {
-        push(V2,nT);
-        push(V2,nT2);
+        push(V2, nT);
+        push(V2, nT2);
         D->t = 1;
     }
     //COMPARACIONES DE MISMA CLASE 
@@ -482,14 +482,14 @@ void round2(Stack *D, Stack *V1, Stack *V2,Stack *P1R2, Stack *P2R2)
         }
         else if(nT->level > nT2->level)
         { 
-            push(V1,nT);
-            push(V1,nT2);
+            push(V1, nT);
+            push(V1, nT2);
             D->t = 0;
         }
         else if(nT->level < nT2->level)
         {
-            push(V2,nT);
-            push(V2,nT2);
+            push(V2, nT);
+            push(V2, nT2);
             D->t=1;
         }
     }
@@ -503,14 +503,14 @@ void round2(Stack *D, Stack *V1, Stack *V2,Stack *P1R2, Stack *P2R2)
         }
         else if(D->t == 0)
         {
-            push(V1,nT);
-            push(V1,nT2);
+            push(V1, nT);
+            push(V1, nT2);
             //D->t = 0; al estar implicito
         }
         else if(D->t == 1)
         {
-            push(V2,nT);
-            push(V2,nT2);
+            push(V2, nT);
+            push(V2, nT2);
             //D->t = 1; al estar implicito
         }
     }
@@ -522,13 +522,13 @@ void round2(Stack *D, Stack *V1, Stack *V2,Stack *P1R2, Stack *P2R2)
         {
             if(nT2->type == 'E') //enano perdedor
             {
-                push(V1,nT);
-                push(V2,nT2);
+                push(V1, nT);
+                push(V2, nT2);
             }
             else
             {
-                push(V1,nT);
-                push(V1,nT2);
+                push(V1, nT);
+                push(V1, nT2);
                 D->t = 0;
             }
         }
@@ -536,14 +536,14 @@ void round2(Stack *D, Stack *V1, Stack *V2,Stack *P1R2, Stack *P2R2)
         {
             if(nT->level > nT2->level )
             { 
-                push(V1,nT);
-                push(V1,nT2);
+                push(V1, nT);
+                push(V1, nT2);
                 D->t = 0;
             }
             else if(nT->level < nT2->level )
             { 
-                push(V2,nT);
-                push(V2,nT2);
+                push(V2, nT);
+                push(V2, nT2);
                 D->t = 1;
             }
         }
@@ -554,13 +554,13 @@ void round2(Stack *D, Stack *V1, Stack *V2,Stack *P1R2, Stack *P2R2)
         {
             if(nT2->type == 'E') //enano perdedor
             {
-                push(V1,nT);
-                push(V2,nT2);
+                push(V1, nT);
+                push(V2, nT2);
             }
             else
             {
-                push(V2,nT);
-                push(V2,nT2);
+                push(V2, nT);
+                push(V2, nT2);
                 D->t = 1;
             }
         }
@@ -568,14 +568,14 @@ void round2(Stack *D, Stack *V1, Stack *V2,Stack *P1R2, Stack *P2R2)
         {
             if(nT->level > nT2->level )
             { 
-                push(V1,nT);
-                push(V1,nT2);
+                push(V1, nT);
+                push(V1, nT2);
                 D->t = 0;
             }
             else if(nT->level < nT2->level)
             { 
-                push(V2,nT);
-                push(V2,nT2);
+                push(V2, nT);
+                push(V2, nT2);
                 D->t = 1;
             }
         }
@@ -586,13 +586,13 @@ void round2(Stack *D, Stack *V1, Stack *V2,Stack *P1R2, Stack *P2R2)
         {
             if(nT2->type == 'E') //enano perdedor
             {
-                push(V1,nT);
-                push(V2,nT2);   
+                push(V1, nT);
+                push(V2, nT2);   
             } 
             else
             {
-                push(V1,nT);
-                push(V1,nT2);
+                push(V1, nT);
+                push(V1, nT2);
                 D->t = 0;
             }
         }
@@ -600,13 +600,13 @@ void round2(Stack *D, Stack *V1, Stack *V2,Stack *P1R2, Stack *P2R2)
         { 
             if(nT->type == 'E') //enano perdedor
             {
-                push(V1,nT);
-                push(V2,nT2);   
+                push(V1, nT);
+                push(V2, nT2);   
             }
             else
             { 
-                push(V2,nT);
-                push(V2,nT2);
+                push(V2, nT);
+                push(V2, nT2);
                 D->t = 1;
             }
         }
@@ -809,7 +809,7 @@ void claimWinner(Stack *V1, Stack *V2)
                 P1MAX=TempP1->head->level;
             }
     
-            push(V1,pop(TempP1));
+            push(V1, pop(TempP1));
         }
 
         c = 0;
