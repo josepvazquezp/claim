@@ -22,17 +22,17 @@ void drawTable()
     DrawTexture(textureBack, 0, 0, WHITE);
 
     int i;
-    int ac = 5;
+    int ac = 13;
     for(i = 0 ; i < 10 ; i++)
     {
-        DrawRectangle(ac, 10, 131, 198, WHITE);
-        DrawRectangle(ac, 690, 131, 198, WHITE);
+        DrawRectangle(ac, 8, 135, 202, WHITE);
+        DrawRectangle(ac, 688, 135, 202, WHITE);
         ac += 160;
     }
-    for(i = 0, ac = 5 ; i < 3 ; i++)
+    for(i = 0, ac = 13 ; i < 3 ; i++)
     {
-        DrawRectangle(ac, 220, 131, 198, WHITE);
-        DrawRectangle(ac, 480, 131, 198, WHITE);
+        DrawRectangle(ac, 218, 135, 202, WHITE);
+        DrawRectangle(ac, 478, 135, 202, WHITE);
         ac += 160;
     }
 
@@ -44,6 +44,35 @@ void drawTable()
     DrawRectangle(1390, 382, 202, 135, WHITE);
     DrawTexture(textureDeck, 1392, 384, WHITE);
 
+}
+
+void displayPDeck(Stack *D, Stack *P1, Stack *P2){
+    Node *focusNodeP1 = P1->head;
+
+    int i;
+    int ac = 15;
+    Texture2D tTemp;
+
+    for(i = 0 , ac = 15 ; i < 13 ; i++)
+    {
+        tTemp = LoadTextureFromImage(focusNodeP1->card);
+        UnloadImage(focusNodeP1->card);
+
+        if(i < 10)
+            DrawTexture(tTemp, ac, 690, WHITE);
+        else if(i == 10)
+        {
+            ac = 15;
+            DrawTexture(tTemp, ac, 480, WHITE);
+        }
+        else
+            DrawTexture(tTemp, ac, 480, WHITE);
+
+        ac += 160;
+
+        if(i < 12)
+            focusNodeP1 = focusNodeP1->next;
+    }
 }
 
 Stack *newDeck()
@@ -109,7 +138,7 @@ Stack *newDeck()
 
     Node *focusNode;
 
-    char root[98] = "C:\\Users\\Jose\\Documents\\ITESO\\Semestre3\\Programacion con memoria dinamica\\claim_Clion\\cards\\G0.png";
+    char root[99] = "C:\\Users\\Jose\\Documents\\ITESO\\Semestre3\\Programacion con memoria dinamica\\claim_Clion\\cards\\G0.png\0";
     Image iTemp;
     Texture2D tTemp;
 
@@ -150,7 +179,6 @@ Stack *newDeck()
 
         D->cN++;
 
-        //printf("#%d Type: %c with level: %d\n", D->cN, focusNode->type, focusNode->level);
     }
 
     return D;
