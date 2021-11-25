@@ -49,9 +49,7 @@ int main(void)
 
         if(start == 0)
         {
-            drawTable();
-
-            displayPDeck(D, P1, P2);
+            displayPDeck(D, P1);
 
             /*
             while (peek(D) != NULL)
